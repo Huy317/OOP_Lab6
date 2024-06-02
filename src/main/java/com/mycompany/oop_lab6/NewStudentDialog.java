@@ -135,6 +135,7 @@ public class NewStudentDialog extends JDialog {
         String gender = male.isSelected() == true ? "Male" : "Female";
         String school = schoolState.getSelectedItem().toString();
         newStudent = new Student(id, last, mid, first, yob, gender, school);
+        
         return true;
     }
 }

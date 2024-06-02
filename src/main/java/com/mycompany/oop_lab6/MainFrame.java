@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
             if (dlg.isSaving()) {
                 if (manager.addStudent(dlg.getNewStudent())) {
                     JOptionPane.showMessageDialog(null, "Student added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Student already exist", "Error", JOptionPane.ERROR_MESSAGE);
                     dlg.setVisible(true);
@@ -103,7 +103,7 @@ public class MainFrame extends JFrame {
         }
 
     }
-
+    
     private void clearModel() {
         if (model != null) {
             model.setRowCount(0);

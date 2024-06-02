@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.oop_lab6;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +31,7 @@ public class StudentManager {
     public boolean addStudent(Student stu){
         if (findStudentById(stu.getStudentID()) == null){
             list.add(stu);
+            writeFile();
             return true;
         }
         return false;
@@ -37,6 +43,7 @@ public class StudentManager {
                 break;
             }
         }
+        writeFile();
     }
     public ArrayList<Student> getListStudent() {
         return list;
@@ -45,5 +52,32 @@ public class StudentManager {
         StudentTableModel model = new StudentTableModel();
 
         return model;
+    }
+    public void writeFile() {
+        try {
+            FileOutputStream f = new FileOutputStream("D:\\Student.Dat");
+            ObjectOutputStream oStream = new ObjectOutputStream(f);
+            for (Student stu : list) {
+                oStream.writeObject(stu);
+            }
+            oStream.close();
+        } catch (IOException e) {
+            System.out.println("Error write file");
+        }
+    }
+    public void readFile() {
+        try {
+            FileInputStream f = new FileInputStream("D:\\EiuStaff.eiu");
+            ObjectInputStream inStream = new ObjectInputStream(f);
+            Student stu = null;
+            while ((stu = (Student) inStream.readObject()) != null) {
+                list.add(stu);
+            }
+            inStream.close();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found");
+        } catch (IOException e) {
+            System.out.println("Error read file");
+        }
     }
 }
